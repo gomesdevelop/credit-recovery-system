@@ -19,8 +19,8 @@ export class Customer {
   @Field()
   dateOfBirth: Date;
 
-  @Field(() => [Contact])
-  contact: Contact[];
+  @Field(() => [Contact], { nullable: true, defaultValue: [] })
+  contacts: Contact[];
 
   @Field()
   creditScore: string;

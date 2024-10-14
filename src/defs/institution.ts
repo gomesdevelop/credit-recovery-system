@@ -9,8 +9,8 @@ export class Institution {
   @Field()
   name: string;
 
-  @Field(() => [Contact])
-  contact: Contact[];
+  @Field(() => [Contact], { nullable: true, defaultValue: [] })
+  contacts: Contact[];
 
   @Field(() => [String])
   compliances: string[];

@@ -6,6 +6,7 @@ import { InstitutionResolver } from "./resolvers/institution";
 import { CustomerResolver } from "./resolvers/customer";
 import { CaseResolver } from "./resolvers/case";
 import { WorkflowResolver } from "./resolvers/workflow";
+import { connect } from "./lib/mongo";
 
 async function bootstrap() {
   const schema = await buildSchema({
@@ -25,4 +26,10 @@ async function bootstrap() {
   console.log(`🚀  Server ready at: ${url}`);
 }
 
-bootstrap();
+connect()
+  .then(() => {
+    bootstrap();
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
+  });
