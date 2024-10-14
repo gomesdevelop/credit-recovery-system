@@ -19,6 +19,7 @@
     "graphql-scalars": "^1.23.0",
     "mongoose": "^8.7.1",
     "reflect-metadata": "^0.2.2",
-    "type-graphql": "^2.0.0-rc.2"
+    "type-graphql": "^2.0.0-rc.2",
+    "typedi": "^0.10.0"
   }
 }
