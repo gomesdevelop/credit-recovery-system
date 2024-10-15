@@ -2,7 +2,7 @@
 
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { Customer } from "../defs/customer";
-import { CustomerInput } from "../defs/customer-input";
+import { CustomerInput } from "../defs/inputs/customer-input";
 import Container from "typedi";
 import { CustomerService } from "../services/customer-service";
 
@@ -11,7 +11,7 @@ import { CustomerService } from "../services/customer-service";
 export class CustomerResolver {
   constructor(private readonly service = Container.get(CustomerService)) {}
 
-  @Query((returns) => [Customer])
+  @Query(() => [Customer])
   async getCustomers(): Promise<Customer[]> {
     return new Promise((resolve) => resolve(this.service.getCustomers()));
   }

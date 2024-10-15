@@ -8,7 +8,7 @@ export enum CommunicationType {
 
 @ObjectType()
 export class Communication {
-  @Field((type) => ID)
+  @Field(() => ID)
   id: string;
 
   @Field(() => ID)

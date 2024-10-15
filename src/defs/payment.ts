@@ -16,7 +16,7 @@ export enum PaymentStatus {
 
 @ObjectType()
 export class Payment {
-  @Field((type) => ID)
+  @Field(() => ID)
   id: string;
 
   @Field(() => ID)

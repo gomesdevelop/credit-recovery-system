@@ -1,6 +1,6 @@
 import { Service } from "typedi";
 import CaseModel from "../models/case";
-import { CaseInput } from "../defs/case-input";
+import { CaseInput } from "../defs/inputs/case-input";
 
 @Service()
 export class CaseService {

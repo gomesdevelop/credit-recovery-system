@@ -3,7 +3,7 @@ import { Institution } from "./institution";
 
 @ObjectType()
 export class Workflow {
-  @Field((type) => ID)
+  @Field(() => ID)
   id: String;
 
   @Field(() => Institution, { nullable: true })

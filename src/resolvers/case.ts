@@ -4,13 +4,13 @@ import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { Case } from "../defs/case";
 import Container from "typedi";
 import { CaseService } from "../services/case-service";
-import { CaseInput } from "../defs/case-input";
+import { CaseInput } from "../defs/inputs/case-input";
 
 @Resolver(Case)
 export class CaseResolver {
   constructor(private readonly service = Container.get(CaseService)) {}
 
-  @Query((returns) => [Case])
+  @Query(() => [Case])
   async getCases(): Promise<Case[]> {
     return new Promise((resolve) => resolve(this.service.getCases()));
   }

@@ -1,6 +1,6 @@
 import { Service } from "typedi";
 import InstitutionModel from "../models/institution";
-import { InstitutionInput } from "../defs/institution-input";
+import { InstitutionInput } from "../defs/inputs/institution-input";
 
 @Service()
 export class InstitutionService {

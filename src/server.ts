@@ -23,7 +23,7 @@ async function bootstrap() {
 
   const server = new ApolloServer({ schema });
 
-  const { url } = await server.listen({ port: 4000 });
+  const { url } = await server.listen({ port: process.env.PORT || 4000 });
 
   console.log(`🚀  Server ready at: ${url}`);
 }

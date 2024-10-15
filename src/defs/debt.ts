@@ -12,7 +12,7 @@ export enum DebtType {
 
 @ObjectType()
 export class Debt {
-  @Field((type) => ID)
+  @Field(() => ID)
   id: string;
 
   @Field(() => Customer)

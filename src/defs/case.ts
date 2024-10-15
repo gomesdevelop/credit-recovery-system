@@ -20,7 +20,7 @@ export enum CaseStatus {
 
 @ObjectType()
 export class Case {
-  @Field((type) => ID)
+  @Field(() => ID)
   id: string;
 
   @Field(() => Customer)

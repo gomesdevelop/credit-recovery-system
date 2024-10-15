@@ -1,6 +1,6 @@
 import { Service } from "typedi";
 import WorkflowModel from "../models/workflow";
-import { WorkflowInput } from "../defs/workflow-input";
+import { WorkflowInput } from "../defs/inputs/workflow-input";
 
 @Service()
 export class WorkflowService {

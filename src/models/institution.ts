@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { ContactSchema } from "./contact";
 
 const InstitutionSchema = new Schema(

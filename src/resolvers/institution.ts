@@ -2,8 +2,7 @@
 
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { Institution } from "../defs/institution";
-import InstitutionModel from "../models/institution";
-import { InstitutionInput } from "../defs/institution-input";
+import { InstitutionInput } from "../defs/inputs/institution-input";
 import Container from "typedi";
 import { InstitutionService } from "../services/institution-service";
 

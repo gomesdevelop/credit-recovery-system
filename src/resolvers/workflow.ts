@@ -4,7 +4,7 @@ import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { Workflow } from "../defs/workflow";
 import Container from "typedi";
 import { WorkflowService } from "../services/workflow-service";
-import { WorkflowInput } from "../defs/workflow-input";
+import { WorkflowInput } from "../defs/inputs/workflow-input";
 
 // This resolver retrieves books from the "institutions" array above.
 @Resolver()

@@ -3,7 +3,7 @@ import { Contact } from "./contact";
 
 @ObjectType()
 export class Institution {
-  @Field((type) => ID)
+  @Field(() => ID)
   id: string;
 
   @Field()

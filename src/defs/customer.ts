@@ -9,7 +9,7 @@ export enum CustomerType {
 
 @ObjectType()
 export class Customer {
-  @Field((type) => ID)
+  @Field(() => ID)
   id: string;
 
   @Field({ nullable: true })

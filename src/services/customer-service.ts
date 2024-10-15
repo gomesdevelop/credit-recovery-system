@@ -1,6 +1,6 @@
 import { Service } from "typedi";
 import CustomerModel from "../models/customer";
-import { CustomerInput } from "../defs/customer-input";
+import { CustomerInput } from "../defs/inputs/customer-input";
 
 @Service()
 export class CustomerService {

@@ -1,5 +1,4 @@
-import { Field, ID, InputType, ObjectType } from "type-graphql";
-import { Contact } from "./contact";
+import { Field, InputType } from "type-graphql";
 import { ContactInput } from "./contact-input";
 
 @InputType()

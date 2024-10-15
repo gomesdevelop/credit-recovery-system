@@ -1,5 +1,5 @@
 import { Field, InputType, registerEnumType } from "type-graphql";
-import { CustomerType } from "./customer";
+import { CustomerType } from "../customer";
 import { ContactInput } from "./contact-input";
 
 registerEnumType(CustomerType, {
@@ -14,7 +14,7 @@ export class CustomerInput {
   @Field()
   institutionId: String;
 
-  @Field((type) => CustomerType, {
+  @Field(() => CustomerType, {
     defaultValue: CustomerType.INDIVIDUAL,
     nullable: true,
   })

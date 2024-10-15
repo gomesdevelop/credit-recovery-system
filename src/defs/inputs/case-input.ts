@@ -1,11 +1,5 @@
-import {
-  Field,
-  ID,
-  InputType,
-  ObjectType,
-  registerEnumType,
-} from "type-graphql";
-import { CasePriority, CaseStatus } from "./case";
+import { Field, InputType, registerEnumType } from "type-graphql";
+import { CasePriority, CaseStatus } from "../case";
 
 registerEnumType(CaseStatus, {
   name: "CaseStatus",
@@ -17,10 +11,10 @@ registerEnumType(CasePriority, {
 
 @InputType()
 export class CaseInput {
-  @Field((type) => CaseStatus, { nullable: true })
+  @Field(() => CaseStatus, { nullable: true })
   status: CaseStatus;
 
-  @Field((type) => CasePriority, { nullable: true })
+  @Field(() => CasePriority, { nullable: true })
   priority: CasePriority;
 
   @Field({ nullable: true })
