@@ -15,7 +15,7 @@ export class InstitutionResolver {
   ) {}
 
   @Query(() => [Institution])
-  async institutions(): Promise<any> {
+  async getInstitutions(): Promise<any> {
     return this.institutionService.getInstitutions();
   }
 

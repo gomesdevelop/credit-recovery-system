@@ -2,29 +2,34 @@ import { Field, ID, ObjectType } from "type-graphql";
 import { Contact } from "./contact";
 import { Institution } from "./institution";
 
+export enum CustomerType {
+  INDIVIDUAL = "INDIVIDUAL",
+  BUSINESS = "BUSINESS",
+}
+
 @ObjectType()
 export class Customer {
   @Field((type) => ID)
   id: string;
 
-  @Field()
+  @Field({ nullable: true })
   institution: Institution;
 
   @Field()
   name: string;
 
   @Field()
-  type: string;
+  type: CustomerType;
 
-  @Field()
+  @Field({ nullable: true })
   dateOfBirth: Date;
 
   @Field(() => [Contact], { nullable: true, defaultValue: [] })
   contacts: Contact[];
 
-  @Field()
+  @Field({ nullable: true })
   creditScore: string;
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   riskProfile: string[];
 }

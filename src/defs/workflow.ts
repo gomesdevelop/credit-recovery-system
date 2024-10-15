@@ -4,17 +4,17 @@ import { Institution } from "./institution";
 @ObjectType()
 export class Workflow {
   @Field((type) => ID)
-  id: string;
+  id: String;
 
-  @Field(() => Institution)
+  @Field(() => Institution, { nullable: true })
   institution: Institution;
 
-  @Field()
-  name: string;
+  @Field({ nullable: true })
+  name: String;
 
-  @Field()
-  stages: string;
+  @Field(() => [String], { nullable: true })
+  stages: [String];
 
-  @Field()
+  @Field({ nullable: true })
   activeCases: number;
 }
