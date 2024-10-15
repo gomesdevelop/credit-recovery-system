@@ -8,6 +8,8 @@ import { CaseResolver } from "./resolvers/case";
 import { WorkflowResolver } from "./resolvers/workflow";
 import { connect } from "./lib/mongo";
 
+import "dotenv/config";
+
 async function bootstrap() {
   const schema = await buildSchema({
     resolvers: [

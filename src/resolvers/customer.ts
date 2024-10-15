@@ -1,7 +1,6 @@
 // Resolvers define how to fetch the types defined in your schema.
 
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import { customers } from "../../data";
 import { Customer } from "../defs/customer";
 import { CustomerInput } from "../defs/customer-input";
 import Container from "typedi";
@@ -14,7 +13,7 @@ export class CustomerResolver {
 
   @Query((returns) => [Customer])
   async getCustomers(): Promise<Customer[]> {
-    return new Promise((resolve) => resolve(customers));
+    return new Promise((resolve) => resolve(this.service.getCustomers()));
   }
 
   @Mutation(() => Customer)

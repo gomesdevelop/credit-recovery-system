@@ -1,11 +1,10 @@
 import mongoose, { Schema } from "mongoose";
-import { Contact } from "../defs/contact";
 import { ContactSchema } from "./contact";
 import { CustomerType } from "../defs/customer";
 
 export const CustomerSchema = new Schema({
-  name: String,
   institution: { type: mongoose.Types.ObjectId, ref: "Institution" },
+  name: String,
   type: {
     type: String,
     enum: CustomerType,
