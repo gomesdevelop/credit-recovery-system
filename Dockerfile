@@ -14,7 +14,7 @@ RUN npm install --production
 
 COPY --from=builder /usr/app/dist ./dist
 
-COPY .env .
+# COPY .env .
 
 EXPOSE 4000
 CMD node dist/index.js
