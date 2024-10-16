@@ -1,5 +1,6 @@
 import "reflect-metadata";
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
 import path from "node:path";
 import { buildSchema } from "type-graphql";
 import { InstitutionResolver } from "./resolvers/institution";
@@ -25,7 +26,7 @@ async function bootstrap() {
 
   const server = new ApolloServer({ schema });
 
-  const { url } = await server.listen({ port: process.env.PORT || 4000 });
+  const { url } = await startStandaloneServer(server);
 
   console.log(`🚀  Server ready at: ${url}`);
 }
