@@ -11,12 +11,12 @@ export class CaseService {
   }
 
   async createCase(value: CaseInput): Promise<any> {
-    const { customerId, institutionId, ...rest } = value;
+    const { customer, institution, ...rest } = value;
 
     const newCase = new CaseModel({
       ...rest,
-      institution: { _id: institutionId },
-      customer: { _id: customerId },
+      institution: { _id: institution.id },
+      customer: { _id: customer.id },
     });
     const response = await newCase.save();
 

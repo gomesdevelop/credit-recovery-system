@@ -11,12 +11,12 @@ export class DebtService {
   }
 
   async createDebt(value: DebtInput): Promise<any> {
-    const { customerId, institutionId, ...rest } = value;
+    const { customer, institution, ...rest } = value;
 
     const newDebt = new DebtModel({
       ...rest,
-      institution: { _id: institutionId.id },
-      customer: { _id: customerId.id },
+      institution: { _id: institution.id },
+      customer: { _id: customer.id },
     });
     const response = await newDebt.save();
 

@@ -5,10 +5,10 @@ import { IdInput } from "./id-input";
 @InputType()
 export class DebtInput {
   @Field(() => IdInput, { nullable: true })
-  customerId: IdInput;
+  customer: IdInput;
 
   @Field(() => IdInput, { nullable: true })
-  institutionId: IdInput;
+  institution: IdInput;
 
   @Field({ nullable: true })
   originalAmount: Number;

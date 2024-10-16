@@ -1,9 +1,10 @@
 import { Field, InputType } from "type-graphql";
+import { IdInput } from "./id-input";
 
 @InputType()
 export class WorkflowInput {
-  @Field()
-  institutionId: string;
+  @Field(() => IdInput, { nullable: true })
+  institution: IdInput;
 
   @Field()
   name: string;

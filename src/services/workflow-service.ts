@@ -9,12 +9,12 @@ export class WorkflowService {
   }
 
   async createWorkflow(value: WorkflowInput): Promise<any> {
-    const { institutionId, ...rest } = value;
+    const { institution, ...rest } = value;
     console.log(rest);
 
     const newWorkflow = new WorkflowModel({
       ...rest,
-      institution: { _id: institutionId },
+      institution: { _id: institution.id },
     });
     const response = await newWorkflow.save();
 

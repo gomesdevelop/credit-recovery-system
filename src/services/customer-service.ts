@@ -9,11 +9,11 @@ export class CustomerService {
   }
 
   async createCustomer(value: CustomerInput): Promise<any> {
-    const { institutionId, ...rest } = value;
+    const { institution, ...rest } = value;
 
     const newCustomer = new CustomerModel({
       ...rest,
-      institution: { _id: institutionId },
+      institution: { _id: institution.id },
     });
     const response = await newCustomer.save();
 

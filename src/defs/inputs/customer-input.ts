@@ -1,6 +1,7 @@
 import { Field, InputType } from "type-graphql";
 import { ContactInput } from "./contact-input";
 import { CustomerType } from "../../enuns/customer-type";
+import { IdInput } from "./id-input";
 
 @InputType()
 export class CustomerInput {
@@ -10,8 +11,8 @@ export class CustomerInput {
   @Field()
   document: string;
 
-  @Field()
-  institutionId: String;
+  @Field(() => IdInput, { nullable: true })
+  institution: IdInput;
 
   @Field(() => CustomerType, {
     defaultValue: CustomerType.INDIVIDUAL,
