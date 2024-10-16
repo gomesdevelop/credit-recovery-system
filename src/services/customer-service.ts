@@ -17,6 +17,6 @@ export class CustomerService {
     });
     const response = await newCustomer.save();
 
-    return Promise.resolve(response.populate("institution"));
+    return Promise.resolve(response);
   }
 }

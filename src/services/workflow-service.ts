@@ -18,6 +18,6 @@ export class WorkflowService {
     });
     const response = await newWorkflow.save();
 
-    return Promise.resolve(response.populate("institution"));
+    return Promise.resolve(response);
   }
 }

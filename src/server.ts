@@ -9,12 +9,14 @@ import { WorkflowResolver } from "./resolvers/workflow";
 import { connect } from "./lib/mongo";
 
 import "dotenv/config";
+import { DebtResolver } from "./resolvers/debt";
 
 async function bootstrap() {
   const schema = await buildSchema({
     resolvers: [
       InstitutionResolver,
       CustomerResolver,
+      DebtResolver,
       CaseResolver,
       WorkflowResolver,
     ],

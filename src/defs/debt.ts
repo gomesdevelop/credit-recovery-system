@@ -1,35 +1,34 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { Customer } from "./customer";
 import { Institution } from "./institution";
-import { Payment } from "./payment";
-
-export enum DebtType {
-  LOAN = "LOAN",
-  CREDIT = "CREDIT",
-  CARD = "CARD",
-  MORTGAGE = "MORTGAGE",
-}
+import { DebtType } from "../enuns/debt-type";
 
 @ObjectType()
 export class Debt {
   @Field(() => ID)
   id: string;
 
-  @Field(() => Customer)
+  @Field(() => Customer, { nullable: true })
   customer: Customer;
 
-  @Field(() => Institution)
+  @Field(() => Institution, { nullable: true })
   institution: Institution;
 
-  @Field()
-  originalAmount: number;
+  @Field({ nullable: true })
+  originalAmount: Number;
 
-  @Field()
-  outstandingAmount: number;
+  @Field({ nullable: true })
+  outstandingAmount: Number;
 
-  @Field(() => [Payment])
-  payments?: Payment[];
+  @Field(() => DebtType, { nullable: true })
+  type: DebtType;
 
-  @Field()
-  debtType: DebtType;
+  @Field({ nullable: true })
+  dueDate: Date;
+
+  @Field({ nullable: true })
+  interestRate: Number;
+
+  @Field({ nullable: true })
+  createdAt: Date;
 }

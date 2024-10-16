@@ -1,8 +1,8 @@
 import { Schema } from "mongoose";
+import { ContactType } from "../enuns/contact-type";
 
 export const ContactSchema = new Schema({
-  description: String,
-  address: String,
-  phone: String,
-  email: String,
+  type: { type: String, enum: ContactType, default: ContactType.OTHER },
+  description: { type: String, require: false },
+  value: String,
 });

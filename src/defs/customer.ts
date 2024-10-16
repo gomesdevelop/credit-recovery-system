@@ -1,11 +1,7 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { Contact } from "./contact";
 import { Institution } from "./institution";
-
-export enum CustomerType {
-  INDIVIDUAL = "INDIVIDUAL",
-  BUSINESS = "BUSINESS",
-}
+import { CustomerType } from "../enuns/customer-type";
 
 @ObjectType()
 export class Customer {
@@ -19,6 +15,9 @@ export class Customer {
   name: string;
 
   @Field()
+  document: string;
+
+  @Field(() => CustomerType)
   type: CustomerType;
 
   @Field({ nullable: true })
@@ -30,6 +29,9 @@ export class Customer {
   @Field({ nullable: true })
   creditScore: string;
 
-  @Field(() => [String], { nullable: true })
-  riskProfile: string[];
+  @Field({ nullable: true })
+  riskProfile: string;
+
+  @Field({ nullable: true })
+  createdAt: Date;
 }

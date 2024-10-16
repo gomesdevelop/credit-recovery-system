@@ -20,6 +20,6 @@ export class CaseService {
     });
     const response = await newCase.save();
 
-    return Promise.resolve(response.populate("customer"));
+    return Promise.resolve(response);
   }
 }

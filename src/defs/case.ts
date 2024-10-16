@@ -4,19 +4,8 @@ import { Institution } from "./institution";
 import { Debt } from "./debt";
 import { Payment } from "./payment";
 import { Communication } from "./communication";
-
-export enum CasePriority {
-  LOW = "LOW",
-  MEDIUM = "MEDIUM",
-  HIGH = "HIGH",
-}
-
-export enum CaseStatus {
-  OPEN = "OPEN",
-  IN_NEGOTIATION = "IN_NEGOTIATION",
-  RESOLVED = "RESOLVED",
-  CLOSED = "CLOSED",
-}
+import { Status } from "../enuns/status";
+import { Priority } from "../enuns/priority";
 
 @ObjectType()
 export class Case {
@@ -38,11 +27,11 @@ export class Case {
   @Field(() => [Communication])
   communications: Communication[];
 
-  @Field()
-  status: CaseStatus;
+  @Field(() => Status)
+  status: Status;
 
-  @Field()
-  priority: CasePriority;
+  @Field(() => Priority)
+  priority: Priority;
 
   @Field()
   createdAt: Date;
