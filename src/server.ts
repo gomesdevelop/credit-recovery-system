@@ -1,16 +1,17 @@
+import "dotenv/config";
 import "reflect-metadata";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import path from "node:path";
 import { buildSchema } from "type-graphql";
-import { InstitutionResolver } from "./resolvers/institution";
-import { CustomerResolver } from "./resolvers/customer";
-import { CaseResolver } from "./resolvers/case";
-import { WorkflowResolver } from "./resolvers/workflow";
 import { connect } from "./lib/mongo";
-
-import "dotenv/config";
-import { DebtResolver } from "./resolvers/debt";
+import {
+  CaseResolver,
+  CustomerResolver,
+  DebtResolver,
+  InstitutionResolver,
+  WorkflowResolver,
+} from "./resolvers";
 
 async function bootstrap() {
   const schema = await buildSchema({
@@ -26,9 +27,9 @@ async function bootstrap() {
 
   const server = new ApolloServer({ schema });
 
-  const { url } = await startStandaloneServer(server);
-
-  console.log(`🚀  Server ready at: ${url}`);
+  startStandaloneServer(server).then(({ url }) => {
+    console.log(`🚀  Server ready at: ${url}`);
+  });
 }
 
 connect()
