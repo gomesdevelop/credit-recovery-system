@@ -1,6 +1,6 @@
 // Resolvers define how to fetch the types defined in your schema.
 
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Authorized, Mutation, Query, Resolver } from "type-graphql";
 import { Institution } from "../defs/institution";
 import { InstitutionInput } from "../defs/inputs/institution-input";
 import Container from "typedi";
@@ -13,6 +13,7 @@ export class InstitutionResolver {
     private readonly institutionService = Container.get(InstitutionService)
   ) {}
 
+  @Authorized()
   @Query(() => [Institution])
   async getInstitutions(): Promise<any> {
     return this.institutionService.getInstitutions();
