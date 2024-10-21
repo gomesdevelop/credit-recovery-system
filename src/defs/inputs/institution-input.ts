@@ -1,14 +1,15 @@
 import { Field, InputType } from "type-graphql";
 import { ContactInput } from "./contact-input";
+import { BaseInput } from "./base-input";
 
 @InputType()
-export class InstitutionInput {
+export class InstitutionInput extends BaseInput {
   @Field()
   name: string;
 
-  @Field(() => [ContactInput])
+  @Field(() => [ContactInput], { nullable: true, defaultValue: [] })
   contacts: ContactInput[];
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true, defaultValue: [] })
   compliances: string[];
 }

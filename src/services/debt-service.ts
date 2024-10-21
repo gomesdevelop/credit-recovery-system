@@ -4,19 +4,22 @@ import { DebtInput } from "../defs/inputs/debt-input";
 
 @Service()
 export class DebtService {
-  async getDebts(): Promise<any> {
+  async getDebts(owner: User | null): Promise<any> {
     return Promise.resolve(
-      DebtModel.find().populate("institution").populate("customer")
+      DebtModel.where({ owner_id: owner?.sub })
+        .populate("institution")
+        .populate("customer")
     );
   }
 
-  async createDebt(value: DebtInput): Promise<any> {
+  async createDebt(value: DebtInput, owner: User | null): Promise<any> {
     const { customer, institution, ...rest } = value;
 
     const newDebt = new DebtModel({
       ...rest,
       institution: { _id: institution.id },
       customer: { _id: customer.id },
+      owner_id: owner?.sub,
     });
     const response = await newDebt.save();
 

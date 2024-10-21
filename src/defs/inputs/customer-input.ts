@@ -2,9 +2,10 @@ import { Field, InputType } from "type-graphql";
 import { ContactInput } from "./contact-input";
 import { CustomerType } from "../../enuns/customer-type";
 import { IdInput } from "./id-input";
+import { BaseInput } from "./base-input";
 
 @InputType()
-export class CustomerInput {
+export class CustomerInput extends BaseInput {
   @Field()
   name: string;
 

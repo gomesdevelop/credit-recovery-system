@@ -3,6 +3,7 @@ import { ContactSchema } from "./contact";
 import { CustomerType } from "../enuns/customer-type";
 
 export const CustomerSchema = new Schema({
+  owner_id: { type: String },
   institution: { type: mongoose.Types.ObjectId, ref: "Institution" },
   name: String,
   document: String,

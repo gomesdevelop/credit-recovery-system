@@ -1,6 +1,6 @@
 // Resolvers define how to fetch the types defined in your schema.
 
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { Workflow } from "../defs/workflow";
 import Container from "typedi";
 import { WorkflowService } from "../services/workflow-service";
@@ -12,12 +12,15 @@ export class WorkflowResolver {
   constructor(private readonly service = Container.get(WorkflowService)) {}
 
   @Query(() => [Workflow])
-  async getWorkflows(): Promise<Workflow[]> {
-    return Promise.resolve(this.service.getWorkflows());
+  async getWorkflows(@Ctx() { user }: Context): Promise<Workflow[]> {
+    return Promise.resolve(this.service.getWorkflows(user));
   }
 
   @Mutation(() => Workflow)
-  async createWorkflow(@Arg("data") data: WorkflowInput): Promise<any> {
-    return this.service.createWorkflow(data);
+  async createWorkflow(
+    @Arg("data") data: WorkflowInput,
+    @Ctx() { user }: Context
+  ): Promise<any> {
+    return this.service.createWorkflow(data, user);
   }
 }

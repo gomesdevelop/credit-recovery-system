@@ -66,6 +66,7 @@ export class ServerApplication {
       ],
       emitSchemaFile: path.resolve(__dirname, "schema.gql"),
       authChecker: authenticationChecker,
+      validate: true,
     });
   }
 }
