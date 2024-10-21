@@ -4,7 +4,7 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import path from "node:path";
 import { buildSchemaSync } from "type-graphql";
-import { connect } from "./lib/mongo";
+import { Mongo } from "./lib/mongo";
 import {
   CaseResolver,
   CustomerResolver,
@@ -13,40 +13,61 @@ import {
   WorkflowResolver,
 } from "./resolvers";
 import authenticationChecker from "./middlewares/authentication-checker";
-import { Context } from "./types";
+import { GraphQLError, GraphQLSchema } from "graphql";
+import Container from "typedi";
+import { KeycloakService } from "./services/keycloak-service";
 
-async function bootstrap() {
-  const schema = buildSchemaSync({
-    resolvers: [
-      InstitutionResolver,
-      CustomerResolver,
-      DebtResolver,
-      CaseResolver,
-      WorkflowResolver,
-    ],
-    emitSchemaFile: path.resolve(__dirname, "schema.gql"),
-    authChecker: authenticationChecker,
-  });
+export class ServerApplication {
+  server: ApolloServer<Context>;
+  mongo: Mongo;
+  constructor(
+    private readonly keycloakService = Container.get(KeycloakService)
+  ) {
+    this.mongo = new Mongo();
+    this.mongo.connect().then(() => {
+      this.server = new ApolloServer<Context>({
+        schema: this.generateSchema(),
+      });
 
-  const server = new ApolloServer<Context>({
-    schema,
-  });
+      startStandaloneServer(this.server, {
+        context: async ({ req }) => {
+          try {
+            const user = await this.keycloakService.getUserInfo(
+              req.headers.authorization ?? ""
+            );
 
-  startStandaloneServer(server, {
-    context: async ({ req }) => ({
-      token: req.headers.authorization,
-    }),
-  }).then(({ url }) => {
-    console.log(`🚀  Server ready at: ${url}`);
-  });
+            return {
+              token: req.headers.authorization,
+              user,
+            };
+          } catch (error) {
+            throw new GraphQLError("User is not authenticated", {
+              extensions: {
+                code: "UNAUTHENTICATED",
+                http: { status: 401 },
+              },
+            });
+          }
+        },
+      }).then(({ url }) => {
+        console.log(`🚀  Server ready at: ${url}`);
+      });
+    });
+  }
+
+  generateSchema(): GraphQLSchema {
+    return buildSchemaSync({
+      resolvers: [
+        InstitutionResolver,
+        CustomerResolver,
+        DebtResolver,
+        CaseResolver,
+        WorkflowResolver,
+      ],
+      emitSchemaFile: path.resolve(__dirname, "schema.gql"),
+      authChecker: authenticationChecker,
+    });
+  }
 }
 
-console.log("Initializing MongoDB...");
-connect()
-  .then(() => {
-    console.log("MongoDB Initialized.");
-    bootstrap();
-  })
-  .catch((err) => {
-    console.error("Failed to connect to MongoDB", err);
-  });
+new ServerApplication();
