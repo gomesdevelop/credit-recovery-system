@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import { DebtType } from "../enuns/debt-type";
 
 export const DebtSchema = new Schema({
+  owner_id: { type: String },
   customer: { type: mongoose.Types.ObjectId, ref: "Customer" },
   institution: { type: mongoose.Types.ObjectId, ref: "Institution" },
   originalAmount: Number,

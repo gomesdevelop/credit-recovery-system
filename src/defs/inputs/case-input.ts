@@ -22,4 +22,7 @@ export class CaseInput {
 
   @Field(() => IdInput, { nullable: true })
   customer: IdInput;
+
+  @Field(() => [IdInput], { nullable: true, defaultValue: [] })
+  debts: IdInput[];
 }

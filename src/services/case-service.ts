@@ -6,19 +6,21 @@ import { CaseInput } from "../defs/inputs/case-input";
 export class CaseService {
   async getCases(owner: User | null): Promise<any> {
     return Promise.resolve(
-      CaseModel.where({ owner_id: owner?.sub })
+      await CaseModel.where({ owner_id: owner?.sub })
         .populate("institution")
         .populate("customer")
+        .populate("debts")
     );
   }
 
   async createCase(value: CaseInput, owner: User | null): Promise<any> {
-    const { customer, institution, ...rest } = value;
+    const { customer, institution, debts, ...rest } = value;
 
     const newCase = new CaseModel({
       ...rest,
       institution: { _id: institution.id },
       customer: { _id: customer.id },
+      debts: debts.map((input) => ({ _id: input.id })),
       owner_id: owner?.sub,
     });
     const response = await newCase.save();

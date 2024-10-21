@@ -14,10 +14,10 @@ export class Debt {
   @Field(() => Institution, { nullable: true })
   institution: Institution;
 
-  @Field({ nullable: true })
+  @Field(() => Number, { nullable: true })
   originalAmount: Number;
 
-  @Field({ nullable: true })
+  @Field(() => Number, { nullable: true })
   outstandingAmount: Number;
 
   @Field(() => DebtType, { nullable: true })

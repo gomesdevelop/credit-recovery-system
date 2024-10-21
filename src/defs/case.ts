@@ -12,33 +12,33 @@ export class Case {
   @Field(() => ID)
   id: string;
 
-  @Field(() => Customer)
+  @Field(() => Customer, { nullable: true })
   customer: Customer;
 
-  @Field(() => Institution)
+  @Field(() => Institution, { nullable: true })
   institution: Institution;
 
-  @Field(() => [Debt])
+  @Field(() => [Debt], { nullable: true })
   debts?: Debt[];
 
-  @Field(() => [Payment])
+  @Field(() => [Payment], { nullable: true })
   payments?: Payment[];
 
-  @Field(() => [Communication])
+  @Field(() => [Communication], { nullable: true })
   communications: Communication[];
 
-  @Field(() => Status)
+  @Field(() => Status, { nullable: true })
   status: Status;
 
-  @Field(() => Priority)
+  @Field(() => Priority, { nullable: true })
   priority: Priority;
 
-  @Field()
+  @Field({ nullable: true })
   createdAt: Date;
 
-  @Field()
+  @Field({ nullable: true })
   closedAt?: Date;
 
-  @Field()
+  @Field({ nullable: true })
   assignedAgent?: string;
 }

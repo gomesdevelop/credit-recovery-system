@@ -3,8 +3,10 @@ import { Priority } from "../enuns/priority";
 import { Status } from "../enuns/status";
 
 export const CaseSchema = new Schema({
+  owner_id: { type: String },
   institution: { type: mongoose.Types.ObjectId, ref: "Institution" },
   customer: { type: mongoose.Types.ObjectId, ref: "Customer" },
+  debts: { type: [mongoose.Types.ObjectId], ref: "Debt" },
   status: { type: String, enum: Status, default: Status.OPEN },
   priority: { type: String, enum: Priority, default: Priority.LOW },
   assignedAgent: String,
@@ -14,6 +16,5 @@ export const CaseSchema = new Schema({
 
 export default mongoose.model("Case", CaseSchema);
 
-// debts?: Debt[];
 // payments?: Payment[];
 // communications: Communication[];
